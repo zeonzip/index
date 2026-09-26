@@ -1,0 +1,2 @@
+## Index
+This is a early stage prototype of a reverse engineering framework which you can inject into any iOS app by linking a compiled framework product from this source code and running it on your phone. Once done it will display a "Aperture Toolbar" at the top of your designated iOS app which has a few features which involves inspecting window data and intercepting HTTP requests. More to come later. 
