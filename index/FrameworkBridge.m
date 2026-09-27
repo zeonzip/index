@@ -1,6 +1,6 @@
 //
 //  FrameworkBridge.m
-//  index
+//  Aperture
 //
 
 #import <UIKit/UIKit.h>

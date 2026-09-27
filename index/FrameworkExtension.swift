@@ -1,6 +1,6 @@
 //
 //  FrameworkExtension.swift
-//  index
+//  Aperture
 //
 
 import UIKit
@@ -83,6 +83,8 @@ struct IndexMenuView: View {
     @State private var popoverData: PopoverData?
     @State private var activeHttpProxy = HttpProxy.shared
     
+    let sharedExtensionRegistry: ApertureFrameworkExtensionRegistry = ApertureFrameworkExtensionRegistry.shared;
+    
     var body: some View {
         Menu {
             Label("Aperture Toolbar v\(BundleLocationClass.version)", systemImage: "camera.aperture")
@@ -96,7 +98,7 @@ struct IndexMenuView: View {
                         description: "\(ctx.hostWindow != nil ? "\(ctx.hostWindow!)" : "Error: Host window not available.")"
                     )
                 } label: {
-                    Label("Raw Data", systemImage: "text.document")
+                    Label("Element Picker", systemImage: "pointer.arrow.ipad.rays")
                 }
             }
             
@@ -130,6 +132,20 @@ struct IndexMenuView: View {
             }
             
             Divider()
+            
+            if sharedExtensionRegistry.menuExtensions.count > 0 {
+                ForEach(sharedExtensionRegistry.menuExtensions as? [ExtensionMenu] ?? [], id:\.self) { item in
+                    Menu(item.name) {
+                        ForEach(item.elements, id:\.self) { elem in
+                            Button(elem.name) {
+                                elem.callback();
+                            }
+                        }
+                    }
+                }
+                
+                Divider()
+            }
             
             Button {
                 
